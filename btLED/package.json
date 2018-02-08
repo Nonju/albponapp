@@ -18,6 +18,7 @@
     "ios": "react-native run-ios",
     "android-log": "react-native log-android",
     "ios-log": "react-native log-ios",
+    "add_watches": "echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p",
     "test": "node node_modules/jest/bin/jest.js"
   },
   "jest": {

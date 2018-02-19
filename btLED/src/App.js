@@ -1,25 +1,20 @@
 
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import reducers from './store/reducers';
+import MainScreen from './components/screens/Main';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>WOOO Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
-}
+let store = createStore(reducers);
+
+const App = () => (
+  <Provider store={store} >
+    <MainScreen />
+  </Provider>
+);
+
+// TODO: wrap with redux 'connect'
+export default App;
 

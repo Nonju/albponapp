@@ -10,11 +10,10 @@ import MainScreen from './components/screens/Main';
 let store = createStore(reducers);
 
 const App = () => (
-  <Provider store={store} >
+  <Provider store={store}>
     <MainScreen />
   </Provider>
 );
 
-// TODO: wrap with redux 'connect'
 export default App;
 

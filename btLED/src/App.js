@@ -5,13 +5,13 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import reducers from './store/reducers';
-import MainScreen from './components/screens/Main';
+import RootStack from './components/screens/';
 
 let store = createStore(reducers);
 
 const App = () => (
   <Provider store={store} >
-    <MainScreen />
+    <RootStack />
   </Provider>
 );
 

@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
-class MainScreen extends React.Component {
+class BtConnectScreen extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -13,7 +13,7 @@ class MainScreen extends React.Component {
 	render() {
 		return (
 			<View>
-				<Text>MainScreen component</Text>
+				<Text>BtConnectScreen component</Text>
 			</View>
 		);
 	}
@@ -22,4 +22,4 @@ class MainScreen extends React.Component {
 export default connect(
 	state => ({}),
 	null
-)(MainScreen);
+)(BtConnectScreen);

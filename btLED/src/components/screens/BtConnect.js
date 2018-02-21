@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
 
 class BtConnectScreen extends React.Component {
@@ -14,6 +14,11 @@ class BtConnectScreen extends React.Component {
 		return (
 			<View>
 				<Text>BtConnectScreen component</Text>
+
+				<Button
+					title='Go back'
+					onPress={() => this.props.navigation.goBack()}
+				/>
 			</View>
 		);
 	}

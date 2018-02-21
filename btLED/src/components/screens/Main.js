@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
 
 class MainScreen extends React.Component {
@@ -14,6 +14,10 @@ class MainScreen extends React.Component {
 		return (
 			<View>
 				<Text>MainScreen component</Text>
+				<Button
+					title='Go to BtConnect'
+					onPress={() => this.props.navigation.navigate('BtConnect')}
+				/>
 			</View>
 		);
 	}

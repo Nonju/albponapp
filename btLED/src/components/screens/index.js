@@ -1,4 +1,6 @@
-
+/*
+	https://reactnavigation.org/docs/getting-started.html
+*/
 import { StackNavigator } from 'react-navigation';
 
 import MainScreen from './Main';

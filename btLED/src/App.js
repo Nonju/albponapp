@@ -15,6 +15,5 @@ const App = () => (
   </Provider>
 );
 
-// TODO: wrap with redux 'connect'
 export default App;
 

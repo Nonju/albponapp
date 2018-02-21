@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { View, Text } from 'react-native';
-
+import { connect } from 'react-redux';
 
 class MainScreen extends React.Component {
 	constructor(props) {
@@ -18,5 +18,7 @@ class MainScreen extends React.Component {
 	}
 };
 
-// TODO: wrap with redux "connect"
-export default MainScreen;
+export default connect(
+	state => ({}),
+	null
+)(MainScreen);

@@ -1,0 +1,5 @@
+
+# React Native navigation
+- https://medium.com/@ian.mundy/choosing-a-routing-library-for-react-native-604f97e58729
+- https://github.com/react-navigation/react-navigation
+- https://reactnavigation.org/docs/params.html

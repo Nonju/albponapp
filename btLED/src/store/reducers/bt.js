@@ -1,9 +1,38 @@
+import { concat } from 'lodash';
 
-import { ADD } from '../../actionTypes/bt';
+import {
+	SEARCH_START,
+	SEARCH_STOP,
+	ADD,
+} from '../../actionTypes/bt';
 
-export default (state={}, action={}) => {
+import {
+	searchStart,
+	searchStop,
+} from '../../utils/bt';
+
+export default async (state={
+	searching: false,
+	devices: [],
+}, action={}) => {
+
 	switch (action.type) {		
-		case ADD: { return state; }
+		case SEARCH_START: {
+			const success = await searchStart();
+			return { ...state, searching: success };
+		}
+		case SEARCH_STOP: {
+			searchStop();
+			return { ...state, searching: false };
+		}
+		case ADD: {
+			const { devices } = state;
+			const { device } = action;
+			return {
+				...state,
+				devices: concat(devices, [device]),
+			}
+		}
 		default: { return state; }
 	}
 

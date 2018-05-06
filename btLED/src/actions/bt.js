@@ -1,8 +1,19 @@
+import {
+	SEARCH_START,
+	SEARCH_STOP,
+	ADD,
+} from '../actionTypes/bt';
 
 
-import { ADD } from '../actionTypes/bt';
+export const searchStart = () => ({
+	type: SEARCH_START,
+});
 
-export const add = id => {
+export const searchStop = () => ({
+	type: SEARCH_STOP,
+});
+
+export const ADD = device => ({
 	type: ADD,
-	id,
-};
+	device,
+});

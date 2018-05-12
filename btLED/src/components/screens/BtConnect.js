@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
 import askPermissions from '../../utils/permissions';
@@ -14,6 +14,9 @@ import { searchStart, searchStop } from '../../actions/bt';
 const styles = StyleSheet.create({
 	topView: {
 		flex: 1,
+	},
+	listView: {
+		margin: '5%',
 	},
 	bottomView: {
 		position: 'absolute',
@@ -35,15 +38,30 @@ class BtConnectScreen extends React.Component {
 		askPermissions();
 	}
 
+	renderDevice = device => (
+		<View key={device.id}>
+			<Text>ID: {device.id}</Text>
+			<Text>Name: {device.name}</Text>
+			<Text>--------------------------------</Text>
+		</View>
+	)
+
 	render() {
-		const { searching, searchStop, searchStart } = this.props;
+		const { searching, searchStop, searchStart, devices } = this.props;
 		return (
 			<View style={styles.topView}>
-				<Text>BtConnectScreen component</Text>
 				<Button
 					title={searching ? "End search" : "Start search"}
 					onPress={() => searching ? searchStop() : searchStart()}
 				/>
+
+				{/* List of found devices */}
+				<View style={styles.listView}>
+					<FlatList
+						data={devices}
+						renderItem={this.renderDevice}
+					/>
+				</View>
 
 				{/* Create separate component for buttons like this one */}
 				<View style={styles.bottomView}>
@@ -61,6 +79,7 @@ class BtConnectScreen extends React.Component {
 export default connect(
 	state => ({
 		searching: state.bt.searching,
+		devices: state.bt.devices,
 	}),
 	{
 		searchStart,

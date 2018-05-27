@@ -5,7 +5,9 @@ import store from '../store';
 import { add, setSearchingState } from '../actions/bt';
 import { hc05 } from './values';
 
-const btActive = () => true; // Todo: implement
+// const btActive = () => true; // Todo: implement
+const btActive = async () => await EasyBluetooth.isAdapterEnable()
+	.catch(e => console.log('Error checking if adapter enabled:', e));
 const getBtState = () => store.getState().bt || {};
 const currentlySearching = () => getBtState().searching;
 
@@ -45,6 +47,7 @@ const onDeviceFound = device => {
 	}
 };
 
+// Todo: find out why not triggered by status change
 const onStatusChanged = status => {
 	console.log('New status:', status);
 };

@@ -1,4 +1,2 @@
 
-export default {
-	hc05: '98d3:31:400fe7',
-};
+export const hc05 = '98:d3:31:40:0f:e7';

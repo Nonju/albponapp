@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, FlatList } from 'react-native';
 import { connect } from 'react-redux';
+import { map } from 'lodash';
 
 import askPermissions from '../../utils/permissions';
 import { searchStart, searchStop } from '../../actions/bt';
@@ -38,16 +39,23 @@ class BtConnectScreen extends React.Component {
 		askPermissions();
 	}
 
-	renderDevice = device => (
-		<View key={device.id}>
-			<Text>ID: {device.id}</Text>
-			<Text>Name: {device.name}</Text>
-			<Text>--------------------------------</Text>
-		</View>
-	)
+	getDevices = () => {
+		const { devices } = this.props;
+		return map(devices, device => ({ ...device, key: device.id }));
+	}
+
+	renderDevice = ({ item }) => ( // Deconstruct 'device' for device.item
+			<View>
+				<Text>ID: {item.id}</Text>
+				<Text>UUID: {item.uuid}</Text>
+				<Text>Name: {item.name}</Text>
+				<Text>--------------------------------</Text>
+			</View>
+		)
 
 	render() {
-		const { searching, searchStop, searchStart, devices } = this.props;
+		const { searching, searchStop, searchStart } = this.props;
+		const devices = this.getDevices();
 		return (
 			<View style={styles.topView}>
 				<Button

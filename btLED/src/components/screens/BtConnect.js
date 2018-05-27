@@ -41,14 +41,14 @@ class BtConnectScreen extends React.Component {
 
 	getDevices = () => {
 		const { devices } = this.props;
-		return map(devices, device => ({ ...device, key: device.id }));
+		return map(devices, device => ({ ...device, key: device.uuid }));
 	}
 
 	renderDevice = ({ item }) => ( // Deconstruct 'device' for device.item
 			<View>
-				<Text>ID: {item.id}</Text>
 				<Text>UUID: {item.uuid}</Text>
 				<Text>Name: {item.name}</Text>
+				<Text>Address: {item.address}</Text>
 				<Text>--------------------------------</Text>
 			</View>
 		)

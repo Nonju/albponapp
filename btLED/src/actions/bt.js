@@ -2,7 +2,10 @@ import {
 	SEARCH_START,
 	SEARCH_STOP,
 	SET_SEARCHING_STATE,
+
 	ADD,
+	CONNECT,
+	DISCONNECT,
 } from '../actionTypes/bt';
 
 
@@ -22,4 +25,12 @@ export const setSearchingState = newState => ({
 export const add = device => ({
 	type: ADD,
 	device,
+});
+
+export const connect = deviceId => ({
+	type: CONNECT,
+	deviceId,
+});
+export const disconnect = () => ({
+	type: DISCONNECT,
 });

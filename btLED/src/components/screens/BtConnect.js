@@ -5,6 +5,7 @@ import { map } from 'lodash';
 
 import askPermissions from '../../utils/permissions';
 import { searchStart, searchStop } from '../../actions/bt';
+import Device from '../Device';
 
 /*
 * Todo's:
@@ -44,14 +45,8 @@ class BtConnectScreen extends React.Component {
 		return map(devices, device => ({ ...device, key: device.uuid }));
 	}
 
-	renderDevice = ({ item }) => ( // Deconstruct 'device' for device.item
-			<View>
-				<Text>UUID: {item.uuid}</Text>
-				<Text>Name: {item.name}</Text>
-				<Text>Address: {item.address}</Text>
-				<Text>--------------------------------</Text>
-			</View>
-		)
+	// Deconstruct 'device' for device.item
+	renderDevice = ({ item }) => <Device item={item} />
 
 	render() {
 		const { searching, searchStop, searchStart } = this.props;
@@ -88,8 +83,7 @@ export default connect(
 	state => ({
 		searching: state.bt.searching,
 		devices: state.bt.devices,
-	}),
-	{
+	}), {
 		searchStart,
 		searchStop,
 	}

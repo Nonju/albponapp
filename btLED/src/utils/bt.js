@@ -41,7 +41,6 @@ const onDeviceFound = device => {
 	};
 
 	// Only add device if not already found
-	const unique = validateDevice(device);
 	if (validateDevice(device)) {
 		addDeviceToStore(device);
 	}
@@ -80,12 +79,20 @@ export const searchStop = () => {
 };
 
 export const connect = deviceId => {
-	throw 'Not yet implemented';
+	const device = getDeviceById(deviceId);
+	console.log('CONNECTING:', deviceId, device);
+	EasyBluetooth.connect(device)
+		.then(() => console.log('Connected to device:', deviceId))
+		.catch(e => console.error('Error connecting to device', e));
 };
 
-export const disconnect = deviceId => {
-	throw 'Not yet implemented';
+export const disconnect = () => {
+	console.log('Disconnecting device:', getBtState().connectedDevice);
+	EasyBluetooth.disconnect();
 };
 
-
-// Todo: Remove requires 'destroy' functionality ??
+export const write = data => {
+	EasyBluetooth.writeln(data)
+		.then(() => console.log('Writing data'))
+		.catch(e => console.error('Error writing data to device', e, data));
+};

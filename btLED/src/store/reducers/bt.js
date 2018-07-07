@@ -4,17 +4,23 @@ import {
 	SEARCH_START,
 	SEARCH_STOP,
 	SET_SEARCHING_STATE,
+
 	ADD,
+	CONNECT,
+	DISCONNECT,
 } from '../../actionTypes/bt';
 
 import {
 	searchStart,
 	searchStop,
+	connect,
+	disconnect,
 } from '../../utils/bt';
 
 export default (state={
 	searching: false,
 	devices: [],
+	connectedDevice: '', // ID of device
 }, action={}) => {
 
 	switch (action.type) {		
@@ -30,6 +36,7 @@ export default (state={
 			const { newState } = action;
 			return { ...state, searching: newState };
 		}
+
 		case ADD: {
 			const { devices } = state;
 			const { device } = action;
@@ -37,6 +44,21 @@ export default (state={
 			return {
 				...state,
 				devices: concat(devices, [device]),
+			};
+		}
+		case CONNECT: {
+			const { deviceId } = action;
+			connect(deviceId);
+			return {
+				...state,
+				connectedDevice: deviceId,
+			};
+		}
+		case DISCONNECT: {
+			disconnect();
+			return {
+				...state,
+				connectedDevice: '',
 			};
 		}
 		default: { return state; }

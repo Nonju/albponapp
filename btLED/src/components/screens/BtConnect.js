@@ -5,7 +5,7 @@ import { map } from 'lodash';
 
 import askPermissions from '../../utils/permissions';
 import { searchStart, searchStop } from '../../actions/bt';
-import Device from '../Device';
+import DeviceListObject from '../DeviceListObject';
 
 /*
 * Todo's:
@@ -46,7 +46,7 @@ class BtConnectScreen extends React.Component {
 	}
 
 	// Deconstruct 'device' for device.item
-	renderDevice = ({ item }) => <Device item={item} />
+	renderDevice = ({ item }) => <DeviceListObject item={item} />
 
 	render() {
 		const { searching, searchStop, searchStart } = this.props;

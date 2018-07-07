@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { connect as btConnect, disconnect as btDisconnect } from '../actions/bt';
 
-class Device extends React.Component {
+class DeviceListObject extends React.Component {
 	constructor(props) {
 		super(props);
 		this.validateItem();
@@ -58,4 +58,4 @@ export default connect(
 		connect: btConnect,
 		disconnect: btDisconnect,
 	}
-)(Device);
+)(DeviceListObject);

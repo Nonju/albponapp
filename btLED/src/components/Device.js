@@ -1,6 +1,5 @@
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
-// import { connect as reduxConnect } from 'react-redux';
 import { connect } from 'react-redux';
 
 import { connect as btConnect, disconnect as btDisconnect } from '../actions/bt';
@@ -39,7 +38,6 @@ class Device extends React.Component {
 		const { uuid, name, address } = this.props.item;
 		const { connectedDevice } = this.props;
 		const isConnected = this.isConnected();
-		console.log('DEVKMALSDA:', { connectedDevice, isConnected });
 		return (
 			<TouchableOpacity onPress={() => this.onPress()}>
 				<Text>Connected: {isConnected ? 'Is connected' : 'Is NOT connected'}</Text>

@@ -82,14 +82,12 @@ export const searchStop = () => {
 
 export const connect = deviceId => {
 	const device = getDeviceById(deviceId);
-	console.log('CONNECTING:', deviceId, device);
 	EasyBluetooth.connect(device)
 		.then(() => console.log('Connected to device:', deviceId))
 		.catch(e => console.error('Error connecting to device', e));
 };
 
 export const disconnect = () => {
-	console.log('Disconnecting device:', getBtState().connectedDevice);
 	EasyBluetooth.disconnect();
 };
 

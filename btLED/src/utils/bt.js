@@ -7,9 +7,10 @@ import { hc05 } from './values';
 
 // const btActive = () => true; // Todo: implement
 const btActive = async () => await EasyBluetooth.isAdapterEnable()
-	.catch(e => console.log('Error checking if adapter enabled:', e));
+	.catch(e => console.error('Error checking if adapter enabled:', e));
 const getBtState = () => store.getState().bt || {};
 const currentlySearching = () => getBtState().searching;
+const getDeviceById = deviceId => find(getBtState().devices, d => d.uuid === deviceId);
 
 const config = {
 	...hc05,
@@ -19,11 +20,12 @@ const config = {
 
 EasyBluetooth.init(config)
 	.then(config => console.log('Bt initiated;', config))
-	.catch(e => console.log('Error initiatin bluetooth:', e));
+	.catch(e => console.error('Error initiatin bluetooth:', e));
 
 const startScan = () => {
+	console.log('Started bt scanning');
 	EasyBluetooth.startScan()
-		.catch(e => console.log('Error scanning devices:', e));
+		.catch(e => console.error('Error scanning devices:', e));
 };
 
 const onDeviceFound = device => {
@@ -75,7 +77,7 @@ export const searchStart = async () => {
 export const searchStop = () => {
 	EasyBluetooth.stopScan()
 		.then(() => console.log('Stopped bt scanning'))
-		.catch(e => console.log('Error ending bt scan:', e));
+		.catch(e => console.error('Error ending bt scan:', e));
 };
 
 export const connect = deviceId => {

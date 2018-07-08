@@ -41,11 +41,11 @@ void executeCommand() {
   }
   else if (command.equals("ON")) digitalWrite(ledPin, HIGH);
   else if (command.equals("OFF")) digitalWrite(ledPin, LOW);
-  else Serial.println("Unknown command");
+  else Serial.println("Unknown command: " + command);
 }
 
 void handleInput() {
-  if (c == ';') {
+  if (c == ':') {
     executeCommand();
     command = "";
     return;

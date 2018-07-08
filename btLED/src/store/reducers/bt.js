@@ -8,6 +8,8 @@ import {
 	ADD,
 	CONNECT,
 	DISCONNECT,
+	SET_CONNECTION_STATUS,
+	WRITE_DATA,
 } from '../../actionTypes/bt';
 
 import {
@@ -15,12 +17,14 @@ import {
 	searchStop,
 	connect,
 	disconnect,
+	write,
 } from '../../utils/bt';
 
 export default (state={
 	searching: false,
 	devices: [],
 	connectedDevice: '', // ID of device
+	connectionStatus: '', // Current status of device connection
 }, action={}) => {
 
 	switch (action.type) {		
@@ -60,6 +64,18 @@ export default (state={
 				...state,
 				connectedDevice: '',
 			};
+		}
+		case SET_CONNECTION_STATUS: {
+			const { status } = action;
+			return {
+				...state,
+				connectionStatus: status,
+			};
+		}
+		case WRITE_DATA: {
+			const { data } = action;
+			write(data);
+			return state;
 		}
 		default: { return state; }
 	}

@@ -6,6 +6,8 @@ import {
 	ADD,
 	CONNECT,
 	DISCONNECT,
+	SET_CONNECTION_STATUS,
+	WRITE_DATA,
 } from '../actionTypes/bt';
 
 
@@ -33,4 +35,14 @@ export const connect = deviceId => ({
 });
 export const disconnect = () => ({
 	type: DISCONNECT,
+});
+
+export const setConnectionStatus = status => ({
+	type: SET_CONNECTION_STATUS,
+	status,
+});
+
+export const write = data => ({
+	type: WRITE_DATA,
+	data,
 });

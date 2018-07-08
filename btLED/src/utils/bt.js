@@ -2,7 +2,7 @@ import EasyBluetooth from 'easy-bluetooth-classic';
 import { find } from 'lodash';
 
 import store from '../store';
-import { add, setSearchingState } from '../actions/bt';
+import { add, setSearchingState, setConnectionStatus } from '../actions/bt';
 import { hc05 } from './values';
 
 // const btActive = () => true; // Todo: implement
@@ -51,6 +51,7 @@ const onDeviceFound = device => {
 // Todo: find out why not triggered by status change
 const onStatusChanged = status => {
 	console.log('New status:', status);
+	store.dispatch(setConnectionStatus(status));
 };
 
 // Add listeners
@@ -92,7 +93,7 @@ export const disconnect = () => {
 };
 
 export const write = data => {
-	EasyBluetooth.writeln(data)
-		.then(() => console.log('Writing data'))
+	EasyBluetooth.write(`${data}:`) // End data with termination character
+		.then(() => console.log('Writing data:', data))
 		.catch(e => console.error('Error writing data to device', e, data));
 };

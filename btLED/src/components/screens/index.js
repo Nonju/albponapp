@@ -5,6 +5,7 @@ import { StackNavigator } from 'react-navigation';
 
 import MainScreen from './Main';
 import BtConnectScreen from './BtConnect';
+import ConnectedDevice from './ConnectedDevice';
 
 export default StackNavigator({
 		Main: {
@@ -12,6 +13,9 @@ export default StackNavigator({
 		},
 		BtConnect: {
 			screen: BtConnectScreen,
+		},
+		ConnectedDevice: {
+			screen: ConnectedDevice,
 		},
 	},
 	{

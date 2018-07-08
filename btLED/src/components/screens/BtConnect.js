@@ -40,6 +40,13 @@ class BtConnectScreen extends React.Component {
 		askPermissions();
 	}
 
+	componentWillReceiveProps(newProps) {
+		const { connectionStatus } = newProps;
+		if (connectionStatus === 'CONNECTED') {
+			this.props.navigation.navigate('ConnectedDevice');
+		}
+	}
+
 	getDevices = () => {
 		const { devices } = this.props;
 		return map(devices, device => ({ ...device, key: device.uuid }));
@@ -83,6 +90,7 @@ export default connect(
 	state => ({
 		searching: state.bt.searching,
 		devices: state.bt.devices,
+		connectionStatus: state.bt.connectionStatus,
 	}), {
 		searchStart,
 		searchStop,

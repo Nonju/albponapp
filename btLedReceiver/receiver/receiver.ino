@@ -5,10 +5,15 @@
 // Connect the HC-05 RX to Aruduino pin 3 TX ( Through Voltage Divider!! )
 SoftwareSerial BTserial(2, 3); // RX | TX
 
-# define ledPin 5
+# define ledPin 5 // Todo: Remove
+
+# define REDPIN 5
+# define GREENPIN 3
+# define BLUEPIN 6
 
 char c;
 String command;
+int r, b, g;
 
 void setup() {
   // Serial setup
@@ -21,6 +26,10 @@ void setup() {
 
   // Setup pins
   pinMode(ledPin, OUTPUT);
+
+  pinMode(REDPIN, OUTPUT);
+  pinMode(GREENPIN, OUTPUT);
+  pinMode(BLUEPIN, OUTPUT);
 }
 
 bool stringIsInt(String s) {
@@ -31,7 +40,7 @@ bool stringIsInt(String s) {
   return true;
 }
 
-void executeCommand() {
+/*void executeCommand() {
   Serial.println("Executing command: " + command);
   if (stringIsInt(command)) {
     int number = command.toInt();
@@ -42,10 +51,34 @@ void executeCommand() {
   else if (command.equals("ON")) digitalWrite(ledPin, HIGH);
   else if (command.equals("OFF")) digitalWrite(ledPin, LOW);
   else Serial.println("Unknown command: " + command);
+}*/
+
+void updateLed() {
+  analogWrite(REDPIN, r);
+  analogWrite(GREENPIN, g);
+  analogWrite(BLUEPIN, b);
+}
+
+void executeCommand() {
+  Serial.println("Executing command22: " + command);
+  if (command.equals("CYCLING")) {
+    // Cycle through every color combination
+  } else if (command.length() == 9) {
+    r = command.substring(0,3).toInt();
+    g = command.substring(3,6).toInt();
+    b = command.substring(6,9).toInt();
+    Serial.print("RGB: ");
+    Serial.println(r);
+    Serial.println(g);
+    Serial.println(b);
+    updateLed();
+  } else {
+    Serial.println("Invalid command:" + command);
+  }
 }
 
 void handleInput() {
-  if (c == ':') {
+  if (c == ';') {
     executeCommand();
     command = "";
     return;

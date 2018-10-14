@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, Slider } from 'react-native';
 import { connect } from 'react-redux';
 import { find } from 'lodash';
 
@@ -24,19 +24,17 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 	},
 
-	deviceInputField: {
-		width: 150,
-		textAlign: 'center'
-	},
+	deviceColorSlider: {
+		width: 200,
+		margin: 5
+	}
 });
 
 class ConnectedDevice extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			device: null,
-			text: '',
-		};
+		this.state = { device: null };
+		this.resetColors();
 	}
 
 	componentDidMount() {
@@ -44,6 +42,8 @@ class ConnectedDevice extends React.Component {
 		const device = find(devices, d => d.uuid === connectedDevice);
 		this.setState({ device });
 	}
+
+	resetColors = () => (this.colors = { r: '000', g: '000', b: '000' })
 
 	renderStatus = () => {
 		const { connectionStatus } = this.props;
@@ -69,22 +69,30 @@ class ConnectedDevice extends React.Component {
 	}
 
 	renderDeviceInput = () => {
-		const { text } = this.state;
 
 		const submitData = () => {
-			this.props.write(text.trim());
-			this.setState({ text: '' });
+			this.props.write(Object.values(this.colors).join(''));
+			this.resetColors();
 		};
 
 		return (
 			<View style={styles.partView}>
-				<TextInput
-					style={styles.deviceInputField}
-					onChangeText={text => this.setState({ text })}
-					placeholder="Enter text to send"
-					keyboardType="numeric"
-					value={text}
-				/>
+				{['r', 'g', 'b'].map(color => (
+					<Slider
+						key={Math.random()}
+						maximumValue={255}
+						onValueChange={value => {
+							console.log('Setting color for slider', color, value);
+							let colorValue = Math.floor(value).toString();
+							while (colorValue.length < 3) colorValue = '0' + colorValue;
+							this.colors[color] = colorValue;
+							// this.colors[color] = Math.floor(value).toString(16).padStart(2, '0');
+							console.log('COLORS', this.colors);
+						}}
+						// value={this.state[color]}
+						style={styles.deviceColorSlider}
+					/>
+				))}
 				<Button
 					title="Submit"
 					onPress={submitData}

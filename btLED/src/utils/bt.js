@@ -93,7 +93,7 @@ export const disconnect = () => {
 };
 
 export const write = data => {
-	EasyBluetooth.write(`${data}:`) // End data with termination character
+	EasyBluetooth.write(`${data};`) // End data with termination character
 		.then(() => console.log('Writing data:', data))
 		.catch(e => console.error('Error writing data to device', e, data));
 };

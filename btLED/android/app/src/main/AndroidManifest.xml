@@ -15,10 +15,6 @@
       -->
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
 
-    <uses-sdk
-        android:minSdkVersion="18"
-        android:targetSdkVersion="25" />
-
     <application
       android:name=".MainApplication"
       android:allowBackup="true"

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@babel/preset-react": "^7.0.0",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
@@ -11,6 +12,18 @@
     "eslint-plugin-react": "^7.7.0",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "16.2.0"
+  },
+  "dependencies": {
+    "easy-bluetooth-classic": "^1.0.4",
+    "lodash": "^4.17.10",
+    "react": "^16.5.1",
+    "react-native": "^0.55.4",
+    "react-navigation": "^1.5.11",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2"
+  },
+  "jest": {
+    "preset": "react-native"
   },
   "scripts": {
     "start": "react-native start",
@@ -21,17 +34,5 @@
     "ios-log": "react-native log-ios",
     "add_watches": "echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p",
     "test": "node node_modules/jest/bin/jest.js"
-  },
-  "jest": {
-    "preset": "react-native"
-  },
-  "dependencies": {
-    "easy-bluetooth-classic": "^1.0.4",
-    "lodash": "^4.17.10",
-    "react": "^16.3.2",
-    "react-native": "0.52.0",
-    "react-navigation": "^1.5.11",
-    "react-redux": "^5.0.7",
-    "redux": "^3.7.2"
   }
 }
